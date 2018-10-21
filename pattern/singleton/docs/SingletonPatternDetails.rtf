@@ -3,7 +3,7 @@
 {\*\generator Msftedit 5.41.21.2510;}\viewkind4\uc1\pard\sa200\sl276\slmult1\lang9\ul\b\f0\fs22 Singleton Pattern\par
 \ulnone\b0 The singleton pattern is a design pattern that restricts the instantiation of a class to one object.Let\rquote s see various design options for implementing such a class. If you have a good handle on static class variables and access modifiers this should not be a difficult task.\ul\b\par
 Structure\ulnone\par
-\pard\sa200\sl240\slmult1{\pict\wmetafile8\picw9181\pich3889\picwgoal5205\pichgoal2205 
+\pard\sa200\sl240\slmult1\b0{\pict\wmetafile8\picw9181\pich3889\picwgoal5205\pichgoal2205 
 010009000003f62b01000000e02b01000000050000000b0200000000050000000c02310fdd23e0
 2b0100430f2000cc00000093005b0100000000310fdd2300000000280000005b01000093000000
 01001800000000007c570200c40e0000c40e000000000000000000000000000000000000000000
@@ -3942,7 +3942,7 @@ ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff0000
 000000000000000000000000000000000000000000000000000000000000000000000000000000
 000000000000000000000000000000000000000000000000000000000000000000000000000000
 00000000000000000000000000000000000000000000000000000000000000030000000000
-}\par
+}\b\par
 \pard\sa200\sl276\slmult1\b0\par
 \ul\b com.sk.design.pattern.singleton.classic\par
 \ulnone\b0\tab Here we have declared getInstance() static so that we can call it without instantiating the class. The first time getInstance() is called it creates a new singleton object and after that it just returns the same object. Note that Singleton obj is not created until we need it and call getInstance() method. \b This is called lazy instantiation\b0 .\par
@@ -19314,11 +19314,17 @@ ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff00030000
 \b0 Here using synchronized makes sure that only one thread at a time can execute getInstance().The main disadvantage of this is method is that using synchronized every time while creating the singleton object is expensive and may decrease the performance of your program. However if performance of getInstance() is not critical for your application this method provides a clean and simple solution.\par
 \b Eager Instantiation\b0\par
 Here we have created instance of singleton in static initializer. JVM executes static initializer when the class is loaded and hence this is guaranteed to be thread safe. Use this method only when your singleton class is light and is used throughout the execution of your program.\par
-\b (Best): Use \ldblquote Double Checked Locking\rdblquote  \par
+\b (Best): Use \ldblquote Double Checked Locking\rdblquote    (problem perior to 1.5 JDK)\par
 \b0 If you notice carefully once an object is created synchronization is no longer useful because now obj will not be null and any sequence of operations will lead to consistent results.\par
 So we will only acquire lock on the getInstance() once, when the obj is null. This way we only synchronize the first way through, just what we want.\par
 We have declared the obj volatile which ensures that multiple threads offer the obj variable correctly when it is being initialized to Singleton instance. This method drastically reduces the overhead of calling the synchronized method every time.\par
-\b\par
+\b (BEST) BillPughSingleton\par
+\b0 Notice the private inner static class that contains the instance of the singleton class. When the singleton class is loaded, SingletonHelper class is not loaded into memory and only when someone calls the getInstance method, this class gets loaded and creates the Singleton class instance.\b\par
+Using Reflection to destroy Singleton Pattern\par
+\b0 Reflection can be used to destroy all the above singleton implementation approaches. Let\rquote s see this with an example class.\b\par
+Enum Singleton\par
+\b0 To overcome this situation with Reflection, Joshua Bloch suggests the use of Enum to implement Singleton design pattern as Java ensures that any enum value is instantiated only once in a Java program. Since Java Enum values are globally accessible, so is the singleton. The drawback is that the enum type is somewhat inflexible; for example, it does not allow lazy initialization.\b\par
+\par
 Reference\b0\par
 {\field{\*\fldinst{HYPERLINK "https://en.wikipedia.org/wiki/Singleton_pattern"}}{\fldrslt{\ul\cf1 https://en.wikipedia.org/wiki/Singleton_pattern}}}\f0\fs22\par
 }
