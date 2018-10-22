@@ -1,0 +1,23 @@
+Adapter Design Patter
+
+	Adapter design pattern is the one of the structural design pattern and its used so that two unrelated 
+interfaces can work together. The object that joins these unrelated interface is called Adapter.
+
+	One of the great real life example is mobile charger. Mobile battery needs around 3volts to charge but 
+the normal socket on wall produces 240volts in India. So mobile charger act as adapter between mobile charging 
+socket and socket of the wall.
+
+Two Way Adapter Pattern
+	While implementing Adapter pattern, there are two approaches – class adapter and object adapter – however both these approaches produce same result.
+
+Class Adapter – This form uses java inheritance and extends the source interface, in our case Socket class.
+			  - example : SocketClassAdapterImpl.java
+Object Adapter – This form uses Java Composition and adapter contains the source object. 
+				- Example : SocketObjectAdapterImpl.java
+				
+Adapter Design Pattern Example in JDK
+	Some of the adapter design pattern example I could easily find in JDK classes are;
+
+	java.util.Arrays#asList()
+	java.io.InputStreamReader(InputStream) (returns a Reader)
+	java.io.OutputStreamWriter(OutputStream) (returns a Writer)				
